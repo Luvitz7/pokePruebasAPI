@@ -18,7 +18,6 @@ body {
     margin: 2rem auto;
     justify-content: space-around;
     align-content: center;
-    border: solid 2px sandybrown;
     border-radius: .6rem;
     text-align: center;
     padding: 1rem;
@@ -59,9 +58,11 @@ h1 {
     padding: 0;
     grid-area: 1 / 3 / 3;
     place-self: center;
+    height: 100%;
+    cursor: pointer;
 }
 
 .buttonReload:hover {
-    background-color: #00d4ff;
+    background-color: rgb(158, 173, 173) ;
     transition: .3s;
 }
