@@ -9,16 +9,56 @@
 </head>
 <body>
     <section class="cardContainer" id="card">
+        <div class="searchContainer">
+            <button class="pokeDexBtn" onclick="findPoke()"></button>
+            <input type="text" placeholder="Nombre o número de pokemon" class="searchPoke" id="searcher">
+        </div>
     <h1 id="pokename">Esta es una prueba</h1>
-    <img  alt="pokemon" class="pokemonImg">
+    <picture>
+        <img  alt="pokemon" class="pokemonImg">
+    </picture>
     <div class="atribute">
     <p><b>Num. Pokedex</b></p>
     <p><b>Tipo</b></p>
     <p id="idpoke" class="box"></p>
     <p id="type" class="box"></p>
-    <button onclick="newPoke()" id="newpoke" class="box buttonReload"><b>Nuevo poke</b></button>
+    <button onclick="randomPoke()" id="newpoke" class="box buttonReload"><b>Nuevo poke</b></button>
+    </div>
+    <div class="tapaPokedex topCover" id="topCover">
+        <div class="pokeball topBall" onclick="openPokedex()">
+            <div class="btnPokeBall"></div>
+        </div>
+    </div>
+    <div class="tapaPokedex downCover" id="bottomCover">
+        <div class="pokeball downBall" onclick="openPokedex()">
+            <div class="btnPokeBall"></div>
+        </div>
+    </div>
+    <div class="moreInfo">
+        <h2>Stats</h2>
+        <div class="containerStats">
+            <p class="hp" id="hp"><b>HP:</b> 100</p>
+            <p class="atk" id="atk"><b>ATK:</b> 100</p>
+            <p class="def" id="def"><b>DEF:</b> 100</p>
+            <p class="atkEsp" id="atkEsp"><b>ATK ESP:</b> 100</p>
+            <p class="defEsp" id="defEsp"><b>DEF ESP:</b> 100</p>
+            <p class="speed" id="speed"><b>SPEED:</b> 100</p>
+            <p class="pokeHeight" id="pokeHeight"><b>Height:</b>100</p>
+            <p class="pokeWeight" id="pokeWeight"><b>Weight:</b> 100</p>
+        </div>
+        <h2>Abilities</h2>
+        <div class="abilities">
+            <p class="hp"><b>HP:</b> 100</p>
+            <p class="atk"><b>ATK:</b> 100</p>
+            <p class="def"><b>DEF:</b> 100</p>
+        </div>
+        <h2>More Info</h2>
+        <div class="extraInf">
+            <p class="hp"><b>HP:</b> 100</p>
+            <p class="atk"><b>ATK:</b> 100</p>
+        </div>
     </div>
     </section>
-    <script src="callbackAPI.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
