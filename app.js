@@ -116,9 +116,13 @@ function newPoke (data) {
             ...pokemon,
             type2: data.types[1].type.name,
         }
-        const typePoke2 = document.createElement('P');
-        typePoke2.innerHTML = `<b>Type: </b>${pokemon.type2.toUpperCase()}`
-        extraInfPoke.appendChild(typePoke2);
+        const type2 = $('typePoke2');
+        type2.innerHTML = `<b>Type: </b>${pokemon.type2.toUpperCase()}`;
+        type2.style.display = "";
+    } else {
+        const type2 = $('typePoke2');
+        type2.innerHTML = "";
+        type2.style.display = "none";
     }
     console.log('pokemon', pokemon);
 
