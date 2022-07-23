@@ -10,7 +10,7 @@
 <body>
     <section class="cardContainer" id="card">
         <div class="searchContainer">
-            <button class="pokeDexBtn" onclick="findPoke()"></button>
+            <button class="pokeDexBtn" onclick="moreInfo()"></button>
             <input type="text" placeholder="Nombre o número de pokemon" class="searchPoke" id="searcher">
         </div>
     <h1 id="pokename">Esta es una prueba</h1>
@@ -19,10 +19,11 @@
     </picture>
     <div class="atribute">
     <p><b>Num. Pokedex</b></p>
-    <p><b>Tipo</b></p>
     <p id="idpoke" class="box"></p>
+    <button onclick="randomPoke()" id="newpoke" class="box buttonReload"><b>Random poke</b></button>
+    <p><b>Tipo</b></p>
     <p id="type" class="box"></p>
-    <button onclick="randomPoke()" id="newpoke" class="box buttonReload"><b>Nuevo poke</b></button>
+    <button onclick="findPoke()" id="findPoke" class="box buttonReload"><b>Buscar poke</b></button>
     </div>
     <div class="tapaPokedex topCover" id="topCover">
         <div class="pokeball topBall" onclick="openPokedex()">
@@ -48,14 +49,11 @@
         </div>
         <h2>Abilities</h2>
         <div class="abilities">
-            <p class="hp"><b>HP:</b> 100</p>
-            <p class="atk"><b>ATK:</b> 100</p>
-            <p class="def"><b>DEF:</b> 100</p>
+
         </div>
         <h2>More Info</h2>
         <div class="extraInf">
-            <p class="hp"><b>HP:</b> 100</p>
-            <p class="atk"><b>ATK:</b> 100</p>
+            <p id="exp-base"></p>
         </div>
     </div>
     </section>

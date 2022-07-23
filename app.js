@@ -19,13 +19,13 @@ function fetchPoke (uri) {
 }
 
 function randomPoke () {
-    let id_pokemon = 1 + Math.floor(Math.random() * 649);
+    let id_pokemon = 1 + Math.floor(Math.random() * 898);
     const pokemonRandom = `https://pokeapi.co/api/v2/pokemon/${id_pokemon}`; 
     fetchPoke(pokemonRandom);
 }
 
 function findPoke () {
-    const texto = searcherInput.value;
+    const texto = searcherInput.value.toLowerCase();
     if (Boolean(texto)) {
         const findPoke = `https://pokeapi.co/api/v2/pokemon/${texto}/`;
         fetchPoke(findPoke);
@@ -40,22 +40,25 @@ randomPoke();
 
 const topCover = $('topCover');
 const bottomCover = $('bottomCover');
-let pokeballBtn = false
+const moreInfoModal =document.querySelector('.moreInfo');
+let pokeballBtn = false;
+let moreInfoBtn = false;
 
 // Renderiza al Pokemon
 function newPoke (data) {
-    const abilitiesContainer = document.querySelector('abilities')
-
+    const abilitiesContainer = document.querySelector('.abilities');
+    abilitiesContainer.innerHTML = "";
+    const extraInfPoke = document.querySelector('.extraInf');
     let pokemon = {
         exp_base: data.base_experience,
         name : data.name,
         height: data.height,
         id: data.id,
-        pic: data.sprites.other.dream_world.front_default,
+        pic: data.sprites.other["official-artwork"].front_default,
         type: data.types[0].type.name,
         weight: data.weight,
         abilities: {
-            ability: data.abilities[0].ability.name,
+            ability1: data.abilities[0].ability.name,
             hidden_ability1: data.abilities[0].is_hidden
         },
         stats: {
@@ -77,7 +80,15 @@ function newPoke (data) {
                 hidden_ability2: data.abilities[1].is_hidden
             }
         };
-        // abilitiesContainer.appendChild = `<p>${pokemon.weight}<p>`
+
+        const ability2 = document.createElement('P');
+        ability2.innerText = pokemon.abilities.ability2;
+        abilitiesContainer.appendChild(ability2);
+
+        const hidden_ability2 = document.createElement('P');
+        hidden_ability2.innerText = `${!pokemon.abilities.hidden_ability2 ? "Normal" : "Oculta"}`
+        abilitiesContainer.appendChild(hidden_ability2);
+
         if (Boolean(data.abilities[2])) {
             pokemon = {
                 ...pokemon,
@@ -86,7 +97,16 @@ function newPoke (data) {
                 ability3: data.abilities[2].ability.name,
                 hidden_ability3: data.abilities[2].is_hidden
                 }
-            }} 
+            }
+
+            const ability3 = document.createElement('P');
+            ability3.innerText = pokemon.abilities.ability3;
+            abilitiesContainer.appendChild(ability3);
+
+            const hidden_ability3 = document.createElement('P');
+            hidden_ability3.innerText = `${!pokemon.abilities.hidden_ability3 ? "Normal" : "Oculta"}`
+            abilitiesContainer.appendChild(hidden_ability3);
+        } 
     } else {
         console.log('No hay segundas habilidades');
     };
@@ -96,12 +116,16 @@ function newPoke (data) {
             ...pokemon,
             type2: data.types[1].type.name,
         }
+        const typePoke2 = document.createElement('P');
+        typePoke2.innerHTML = `<b>Type: </b>${pokemon.type2.toUpperCase()}`
+        extraInfPoke.appendChild(typePoke2);
     }
     console.log('pokemon', pokemon);
+
     document.querySelector('img').src = pokemon.pic;
     // Render de los Pokes pantalla principal
-    $('pokename').innerHTML = pokemon.name;
-    $('idpoke').innerHTML= pokemon.id;
+    $('pokename').innerText = pokemon.name;
+    $('idpoke').innerText= pokemon.id;
     $('type').innerText = pokemon.type;
     switch (pokemon.type) {
         case "bug":
@@ -158,14 +182,24 @@ function newPoke (data) {
     }
 
     // Render más informacion pantalla secundaria oculta
-    $('hp').innerHTML = `<b>HP:</b> ${pokemon.stats.hp}`
-    $('speed').innerHTML = `<b>SPEED:</b> ${pokemon.stats.speed}`
-    $('atk').innerHTML = `<b>ATK:</b> ${pokemon.stats.atk}`
-    $('def').innerHTML = `<b>DEF:</b> ${pokemon.stats.def}`
-    $('atkEsp').innerHTML = `<b>ATK ESP:</b> ${pokemon.stats.specialAtk}`
-    $('defEsp').innerHTML = `<b>DEF ESP:</b> ${pokemon.stats.specialDef}`
-    $('pokeWeight').innerHTML = `<b>Weight:</b> ${pokemon.weight}`
-    $('pokeHeight').innerHTML = `<b>Height:</b> ${pokemon.height}`
+    $('hp').innerHTML = `<b>HP:</b> ${pokemon.stats.hp}`;
+    $('speed').innerHTML = `<b>SPEED:</b> ${pokemon.stats.speed}`;
+    $('atk').innerHTML = `<b>ATK:</b> ${pokemon.stats.atk}`;
+    $('def').innerHTML = `<b>DEF:</b> ${pokemon.stats.def}`;
+    $('atkEsp').innerHTML = `<b>ATK ESP:</b> ${pokemon.stats.specialAtk}`;
+    $('defEsp').innerHTML = `<b>DEF ESP:</b> ${pokemon.stats.specialDef}`;
+    $('pokeWeight').innerHTML = `<b>Weight:</b> ${pokemon.weight}`;
+    $('pokeHeight').innerHTML = `<b>Height:</b> ${pokemon.height}`;
+
+    const ability1 = document.createElement('P');
+    ability1.innerText = pokemon.abilities.ability1;
+    abilitiesContainer.appendChild(ability1);
+
+    const hidden_ability1 = document.createElement('P');
+    hidden_ability1.innerText = `${!pokemon.abilities.hidden_ability1 ? "Normal" : "Oculta"}`
+    abilitiesContainer.appendChild(hidden_ability1);
+
+    $('exp-base').innerHTML = `<b>Exp Base: </b>${pokemon.exp_base}`
 }
 
 function notFound () {
@@ -184,5 +218,15 @@ function openPokedex () {
         pokeballBtn = false
         topCover.style.transform = "translateY(0)";
         bottomCover.style.transform = "translateY(0)"
+    }
+}
+
+function moreInfo () {
+    if (!moreInfoBtn && pokeballBtn) {
+        moreInfoModal.style.transform = "translateX(0)";
+        moreInfoBtn = true;
+    } else {
+        moreInfoBtn = false
+        moreInfoModal.style.transform = "translateX(-100%)";
     }
 }
